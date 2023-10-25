@@ -13,6 +13,14 @@ module.exports = {
                 use: ["html-loader"]
             },
             {
+                test: /\.jsx$|\.js$/,
+                exclude: /node_modules/,
+                loader: "babel-loader",
+                options: {
+                  presets: ["@babel/preset-env", "@babel/preset-react"]
+                }
+            },
+            {
                 test: /\.(svg|png|jpe?g|gif)$/,
                 dependency: {
                     not: ["url"]
