@@ -5,7 +5,51 @@ body {
     padding: 50px;
 }
 
+.main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
 .image {
     width: 300px;
     height: 300px;
+}
+
+.character-row {
+    display: flex;
+    flex-direction: row;
+    background-color: brown;
+    padding: 10px;
+    border-radius: 10px;
+    gap: 10px;
+    width: max-content;
+}
+
+.square {
+    background-color: beige;
+    background-size: 100% 100%;
+    width: 70px;
+    height: 70px;
+    border-radius: 5px;
+}
+
+.lvl {
+    font-weight: 700;
+    margin: 0;
+    text-align: center;
+    font-size: 2.3em;
+    line-height: 70px;
+}
+
+.skills {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.skills > img {
+    width: 50%;
+    height: 50%;
 }
