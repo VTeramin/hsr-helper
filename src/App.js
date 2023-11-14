@@ -5,6 +5,7 @@ const App = () => {
     return (
         <div className="main">
             <CharacterRow />
+            <CharacterRow />
         </div>
     )
 }
