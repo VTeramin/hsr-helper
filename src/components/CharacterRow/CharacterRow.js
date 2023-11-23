@@ -1,4 +1,6 @@
 import React from "react";
+import { useSelector, useDispatch } from "react-redux";
+
 import Character from "./Character";
 import Lvl from "./Lvl";
 import LightCone from "./LightCone";
@@ -7,27 +9,35 @@ import Relic from "./Relic";
 import ProgressBar from "./ProgressBar";
 
 const CharacterRow = () => {
-    const imgSource = "https://cdn.jsdelivr.net/gh/Mar-7th/StarRailRes@master";
-    const characterID = "1208";
-    const lvl = 80;
-    const lightConeID = "24002";
-    const relicID = "106";
-    const relicIndices = [0, 1, 2, 3];
-    const ornamentID = "302";
-    const ornamentIndices = [0, 1];
-    const characterProgress = 30;
+    const rowID = 0;
+    const characterData = useSelector((state) => state.rowsData[rowID]);
+
+    const relics = characterData.relicsID.map((relicID, ind) => {
+        return <Relic
+            key={"r" + ind}
+            relicID={relicID}
+            ind={ind}
+        />;
+    });
+    const ornaments = characterData.ornamentsID.map((relicID, ind) => {
+        return <Relic
+            key={"o" + ind}
+            relicID={relicID}
+            ind={ind}
+        />;
+    });
 
     return (
         <div className="character-row">
             <div className="character__data">
-                <Character imgSource={imgSource} characterID={characterID} />
-                <Lvl lvl={lvl} />
-                <LightCone imgSource={imgSource} lightConeID={lightConeID} />
-                <Skills imgSource={imgSource} characterID={characterID} />
-                {relicIndices.map(index => <Relic index={index} imgSource={imgSource} relicID={relicID} />)}
-                {ornamentIndices.map(index => <Relic index={index} imgSource={imgSource} relicID={ornamentID} />)}
+                <Character rowID={rowID} />
+                <Lvl rowID={rowID} />
+                <LightCone rowID={rowID} />
+                <Skills rowID={rowID} />
+                {relics}
+                {ornaments}
             </div>
-            <ProgressBar characterProgress={characterProgress} />
+            <ProgressBar rowID={rowID} />
         </div>
     )
 }

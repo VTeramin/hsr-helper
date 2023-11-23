@@ -1,9 +1,12 @@
 import React from "react";
+import { useSelector, useDispatch } from "react-redux";
 
-const Lvl = ({lvl}) => {
+const Lvl = ({rowID}) => {
+    const characterData = useSelector((state) => state.rowsData[rowID]);
+
     return (
         <div className="square">
-            <p className="lvl">{lvl}</p>
+            <p className="lvl">{characterData.lvl}</p>
         </div>
     )
 };
