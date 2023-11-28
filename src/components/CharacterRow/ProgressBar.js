@@ -9,7 +9,7 @@ const ProgressBar = ({rowID}) => {
     
     return (
         <div className="progress-bar">
-            <div className="progress-bar--filled" style={styles}></div>
+            <div className="progress-bar__filled" style={styles}></div>
         </div>
     )
 }

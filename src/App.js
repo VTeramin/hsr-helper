@@ -1,5 +1,5 @@
 import React from "react";
-import CharacterRow from "./components/characterRow/CharacterRow";
+import CharacterRow from "./components/CharacterRow";
 
 const App = () => {
     return (

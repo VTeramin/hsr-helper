@@ -6,7 +6,7 @@ const Lvl = ({rowID}) => {
 
     return (
         <div className="square">
-            <p className="lvl">{characterData.lvl}</p>
+            <p className="square__lvl">{characterData.lvl}</p>
         </div>
     )
 };

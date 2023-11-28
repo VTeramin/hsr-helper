@@ -1,12 +1,12 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 
-import Character from "./Character";
-import Lvl from "./Lvl";
-import LightCone from "./LightCone";
-import Skills from "./Skills";
-import Relic from "./Relic";
-import ProgressBar from "./ProgressBar";
+import Character from "./characterRow/Character";
+import Lvl from "./characterRow/Lvl";
+import LightCone from "./characterRow/LightCone";
+import Skills from "./characterRow/Skills";
+import Relic from "./characterRow/Relic";
+import ProgressBar from "./characterRow/ProgressBar";
 
 const CharacterRow = () => {
     const rowID = 0;
@@ -29,7 +29,7 @@ const CharacterRow = () => {
 
     return (
         <div className="character-row">
-            <div className="character__data">
+            <div className="character-row__squares-container">
                 <Character rowID={rowID} />
                 <Lvl rowID={rowID} />
                 <LightCone rowID={rowID} />
