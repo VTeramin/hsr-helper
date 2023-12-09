@@ -1,0 +1,57 @@
+.character-row {
+    display: flex;
+    flex-direction: column;
+    background-color: $dark-grey;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.character-row__squares-container {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    width: max-content;
+}
+
+.square {
+    background-color: $grey;
+    background-size: 100% 100%;
+    width: 70px;
+    height: 70px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.square__lvl {
+    font-weight: 700;
+    margin: 0;
+    text-align: center;
+    font-size: 2em;
+    line-height: 70px;
+    color: $light-grey;
+}
+
+.skills {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.skills > img {
+    width: 50%;
+    height: 50%;
+}
+
+.progress-bar {
+    height: 3px;
+    width: 100%;
+    margin-top: 10px;
+    background-color: $grey;
+    border-radius: 5px;
+}
+
+.progress-bar__filled {
+    height: 3px;
+    background-color: $light-grey;
+    border-radius: 5px;
+}

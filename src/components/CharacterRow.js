@@ -8,8 +8,7 @@ import Skills from "./characterRow/Skills";
 import Relic from "./characterRow/Relic";
 import ProgressBar from "./characterRow/ProgressBar";
 
-const CharacterRow = () => {
-    const rowID = 0;
+const CharacterRow = ({rowID}) => {
     const characterData = useSelector((state) => state.rowsData[rowID]);
 
     const relics = characterData.relicsID.map((relicID, ind) => {

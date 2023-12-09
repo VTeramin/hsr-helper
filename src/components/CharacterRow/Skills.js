@@ -1,7 +1,7 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 
-const Skills = ({rowID}) => {
+const Skills = ({ rowID }) => {
     const characterData = useSelector((state) => state.rowsData[rowID]);
     const imgSource = useSelector((state) => state.imgSource.link);
 

@@ -8,6 +8,14 @@ const initialState = [
         relicsID: [113, 113, 113, 113],
         ornamentsID: [306, 306],
         characterProgress: 30
+    },
+    {
+        characterID: 1206,
+        lvl: 80,
+        lightConeID: 24002,
+        relicsID: [114, 114, 114, 114],
+        ornamentsID: [307, 307],
+        characterProgress: 38
     }
 ];
 
@@ -15,11 +23,13 @@ export const rowsDataSlice = createSlice({
     name: 'rowsData',
     initialState,
     reducers: {
-        changeCharacterID: (state) => {
-            state[0].characterID += 1;
+        changeCharacter: (state, action) => {
+            const rowID = action.payload.rowID;
+            const characterID = action.payload.characterID;
+            state[rowID].characterID = characterID;
         }
     }
 });
 
-export const { changeCharacterID } = rowsDataSlice.actions;
+export const { changeCharacter } = rowsDataSlice.actions;
 export default rowsDataSlice.reducer;

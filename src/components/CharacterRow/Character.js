@@ -1,19 +1,20 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { changeCharacterID } from "../../features/rowsDataSlice"
+import { switchModalState } from "../../features/modalSlice";
 
 const Character = ({rowID}) => {
     const characterData = useSelector((state) => state.rowsData[rowID]);
     const imgSource = useSelector((state) => state.imgSource.link);
-    const dispatch = useDispatch();
     const characterIcon = `${imgSource}/icon/character/${characterData.characterID}.png`;
 
-    function handleClick() {
-        dispatch(changeCharacterID());
+    const dispatch = useDispatch();
+
+    function showModal() {
+        dispatch(switchModalState(rowID));
     }
 
     return (
-        <img src={characterIcon} className="square" onClick={handleClick}></img>
+        <img src={characterIcon} className="square" onClick={showModal}></img>
     )
 };
 
