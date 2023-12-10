@@ -51,8 +51,9 @@ const CharacterModal = () => {
 
     return (
         <div className="modal-window character-modal">
+            <div className="character-modal__title">Choose a character</div>
             <div className="close-button" onClick={closeModal}></div>
-            <div className="characters-icons-container">
+            <div className="character-modal__icons">
                 {charactersIcons}
             </div>
         </div>
