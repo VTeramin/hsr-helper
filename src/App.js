@@ -2,6 +2,7 @@ import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import CharacterRow from "./components/CharacterRow";
 import CharacterModal from "./components/modals/CharacterModal";
+import LvlModal from "./components/modals/LvlModal";
 import { switchModalState } from "./features/modalSlice";
 
 const App = () => {
@@ -9,8 +10,12 @@ const App = () => {
     const rows = characterData.map((rowData, ind) => {
         return <CharacterRow key={ind} rowID={ind} />
     })
+    const modals = {
+        Character: <CharacterModal />,
+        Lvl: <LvlModal />
+    };
 
-    const modalIsOn = useSelector((state) => state.modal.stateIsOn);
+    const { stateIsOn: modalIsOn, type: modalType} = useSelector((state) => state.modal);
 
     const dispatch = useDispatch();
 
@@ -28,7 +33,7 @@ const App = () => {
             >
                 {rows}
             </div>
-            {modalIsOn && <CharacterModal />}
+            {modalIsOn && modals[modalType]}
         </>
     )
 }

@@ -67,3 +67,13 @@
         scroll-behavior: smooth;
     }
 }
+
+.lvl-modal {
+    width: max-content;
+    height: max-content;
+
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    gap: 10px;
+}

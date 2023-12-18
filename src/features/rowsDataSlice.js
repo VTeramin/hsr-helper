@@ -27,9 +27,14 @@ export const rowsDataSlice = createSlice({
             const rowID = action.payload.rowID;
             const characterID = action.payload.characterID;
             state[rowID].characterID = characterID;
+        },
+        changeLvl: (state, action) => {
+            const rowID = action.payload.rowID;
+            const lvl = action.payload.lvl;
+            state[rowID].lvl = lvl;
         }
     }
 });
 
-export const { changeCharacter } = rowsDataSlice.actions;
+export const { changeCharacter, changeLvl } = rowsDataSlice.actions;
 export default rowsDataSlice.reducer;
