@@ -1,7 +1,7 @@
 import React from "react";
+import CloseButton from "../buttons/CloseButton";
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { switchModalState } from "../../features/modalSlice";
 import { changeLvl } from "../../features/rowsDataSlice";
 
 const LvlModal = () => {
@@ -15,16 +15,16 @@ const LvlModal = () => {
         setLvl(event.target.value);
     }
 
-    function closeModal() {
-        dispatch(switchModalState());
+    useEffect(() => {
         dispatch(changeLvl({rowID, lvl}));
-    }
+    }, [lvl])
 
     return (
         <div className="modal-window lvl-modal">
+            <div className="lvl-modal__title">Adjust the level</div>
             <input className="lvl-modal__range" type="range" min="0" max="80" step="1" value={lvl} onChange={handleLvlChange} />
-            <div className="square square__lvl">{lvl}</div>
-            <div className="close-button" onClick={closeModal}></div>
+            <div className="lvl-modal__lvl square square__lvl">{lvl}</div>
+            <CloseButton />
         </div>
     )
 };

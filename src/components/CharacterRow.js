@@ -1,12 +1,12 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 
-import Character from "./characterRow/Character";
-import Lvl from "./characterRow/Lvl";
-import LightCone from "./characterRow/LightCone";
-import Skills from "./characterRow/Skills";
-import Relic from "./characterRow/Relic";
-import ProgressBar from "./characterRow/ProgressBar";
+import Character from "./characterRowElements/Character";
+import Lvl from "./characterRowElements/Lvl";
+import LightCone from "./characterRowElements/LightCone";
+import Skills from "./characterRowElements/Skills";
+import Relic from "./characterRowElements/Relic";
+import ProgressBar from "./characterRowElements/ProgressBar";
 
 const CharacterRow = ({rowID}) => {
     const characterData = useSelector((state) => state.rowsData[rowID]);
