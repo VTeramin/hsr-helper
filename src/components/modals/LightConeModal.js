@@ -3,8 +3,9 @@ import CloseButton from "../buttons/CloseButton";
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { changeLightCone } from "../../features/rowsDataSlice";
+import { changeLightConeLvl } from "../../features/rowsDataSlice";
 
-const LightCone = () => {
+const LightConeModal = () => {
     const imgSource = useSelector((state) => state.imgSource.link);
     const rowID = useSelector((state) => state.modal.rowID);
     const rowPath = useSelector((state) => state.rowsData[rowID].path);
@@ -15,6 +16,8 @@ const LightCone = () => {
         ID: currentLightCone,
         description: ""
     });
+    const initialLightConeLvl = useSelector((state) => state.rowsData[rowID].lightConeLvl);
+    const [lvl, setLvl] = useState(initialLightConeLvl);
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -30,14 +33,12 @@ const LightCone = () => {
             .then(data => {
                 const IDs = Object.keys(data[0]);
                 const combinedData = IDs.map(ID => {
-                    const params = data[0][ID].params[0]
-                        .map(param => param < 1 ? param * 100 : param)
-                        .map(param => Math.floor(param * 10) / 10);
+                    const params = data[0][ID].params[0];
 
                     let description = data[0][ID].desc;
                     description = description
-                        .replace(/#\d\[(i|f\d)\]/g, rep => params[rep[1] - 1])
-                        .replace(/\s1%/g, " 100%");
+                        .replace(/#\d\[(i|f\d)\]%/g, rep => `${Math.floor(params[rep[1] - 1] * 10000) / 100}%`)
+                        .replace(/#\d\[(i|f\d)\]/g, rep => params[rep[1] - 1]);
 
                     const path = data[1][ID].path;
                     return { ID, description, path };
@@ -76,27 +77,35 @@ const LightCone = () => {
     }, [lightConesData]);
 
     useEffect(() => {
-        if(lightConesData.length) {
-            setActiveLightCone(prev => {
-                return {
-                    ID: currentLightCone,
-                    description: lightConesData.find(cone => cone.ID == currentLightCone).description
-                }
+        if (lightConesData.length) {
+            setActiveLightCone({
+                ID: currentLightCone,
+                description: lightConesData.find(cone => cone.ID == currentLightCone).description
             });
         }
     }, [lightConesData, currentLightCone]);
 
+    function handleLvlChange(event) {
+        setLvl(event.target.value);
+    }
+
+    useEffect(() => {
+        dispatch(changeLightConeLvl({rowID, lvl}));
+    }, [lvl])
+
     return (
         <div className="modal-window lightcone-modal">
-            <h2 className="lightcone-modal__title">Choose a Light Cone</h2>
+            <h2 className="lightcone-modal__title">Choose a Light Cone and set it`s lvl</h2>
             <div className="lightcone-modal__lightcones">
                 {lightConesIcons}
             </div>
             <img className="lightcone-modal__selected-lightcone" src={`${imgSource}/image/light_cone_portrait/${activeLightCone.ID}.png`}></img>
+            <div className="lightcone-modal__lvl square square__lvl">{lvl}</div>
+            <input className="lightcone-modal__range" type="range" min="0" max="80" step="1" value={lvl} onChange={handleLvlChange} />
             <p className="lightcone-modal__description">{activeLightCone.description}</p>
             <CloseButton />
         </div>
     )
 };
 
-export default LightCone;
+export default LightConeModal;

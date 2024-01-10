@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import CharacterRow from "./components/CharacterRow";
 import CharacterModal from "./components/modals/CharacterModal";
 import LvlModal from "./components/modals/LvlModal";
-import LightCone from "./components/modals/LightConeModal";
+import LightConeModal from "./components/modals/LightConeModal";
 import { switchModalState } from "./features/modalSlice";
 
 const App = () => {
@@ -14,7 +14,7 @@ const App = () => {
     const modals = {
         Character: <CharacterModal />,
         Lvl: <LvlModal />,
-        LightCone: <LightCone />
+        LightCone: <LightConeModal />
     };
 
     const { stateIsOn: modalIsOn, type: modalType} = useSelector((state) => state.modal);

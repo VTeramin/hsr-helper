@@ -22,6 +22,11 @@
     cursor: pointer;
 }
 
+.square-shadow {
+    position: absolute;
+    background-color: $dark-grey;
+}
+
 .square__lvl {
     font-weight: 700;
     margin: 0;
