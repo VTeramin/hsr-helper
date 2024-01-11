@@ -1,20 +1,32 @@
 import React from "react";
-import CloseButton from "../buttons/CloseButton";
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import CloseButton from "../buttons/CloseButton";
 import { changeCharacter } from "../../features/rowsDataSlice";
 import { switchModalState } from "../../features/modalSlice";
+import { getCharactersData } from "../methods/getCharactersData";
 
 const CharacterModal = () => {
     const imgSource = useSelector((state) => state.imgSource.link);
     const rowID = useSelector((state) => state.modal.rowID);
     const [charactersData, setCharactersData] = useState([]);
-    const [charactersIcons, setCharactersIcons] = useState([]);
     const dispatch = useDispatch();
 
-    function closeModal() {
-        dispatch(switchModalState());
-    }
+    useEffect(() => {
+        getCharactersData(imgSource)
+            .then(data => setCharactersData(data))
+            .catch(error => console.log(error));
+    }, []);
+
+    const icons = [...charactersData].map(el => {
+        return <img
+            key={el.ID}
+            id={el.ID}
+            src={`${imgSource}/icon/character/${el.ID}.png`}
+            className="square"
+            onClick={selectCharacter}
+        ></img>
+    });
 
     function selectCharacter(event) {
         const characterID = event.target.id;
@@ -24,51 +36,15 @@ const CharacterModal = () => {
             characterID,
             path
         }));
-        closeModal();
+        dispatch(switchModalState());
     }
-
-    useEffect(() => {
-        const requestURL = `${imgSource}/index_new/en/characters.json`;
-        fetch(requestURL)
-            .then(response => response.json())
-            .then(data => {
-                const keys = Object.keys(data);
-                const filteredData = keys.map(key => {
-                    return {
-                        ID: key,
-                        path: data[key].path
-                    }
-                })
-                setCharactersData(filteredData);
-            });
-    }, []);
-
-    useEffect(() => {
-        setCharactersIcons([]);
-        charactersData.forEach(el => {
-            const ID = el.ID;
-            if (ID) {
-                const characterIcon = `${imgSource}/icon/character/${ID}.png`;
-                setCharactersIcons(prev => [
-                    ...prev,
-                    <img
-                        key={ID}
-                        id={ID}
-                        src={characterIcon}
-                        className="square"
-                        onClick={selectCharacter}
-                    ></img>
-                ])
-            }
-        })
-    }, [charactersData]);
 
     return (
         <div className="modal-window character-modal">
             <h2 className="character-modal__title">Choose a character</h2>
             <CloseButton />
             <div className="character-modal__icons">
-                {charactersIcons}
+                {icons}
             </div>
         </div>
     )

@@ -3,14 +3,13 @@ import { useSelector, useDispatch } from "react-redux";
 import { switchModalState } from "../../features/modalSlice";
 import { changeModal } from "../../features/modalSlice";
 
-const Lvl = ({rowID}) => {
+const Lvl = ({ rowID }) => {
     const characterData = useSelector((state) => state.rowsData[rowID]);
-
     const dispatch = useDispatch();
 
     function showModal() {
         dispatch(switchModalState(rowID));
-        dispatch(changeModal({rowID, type: "Lvl"}));
+        dispatch(changeModal({ rowID, type: "Lvl" }));
     }
 
     return (

@@ -1,51 +1,37 @@
 import React from "react";
-import CloseButton from "../buttons/CloseButton";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import CloseButton from "../buttons/CloseButton";
 import { changeLightCone } from "../../features/rowsDataSlice";
 import { changeLightConeLvl } from "../../features/rowsDataSlice";
+import { getLightConesData } from "../methods/getLightConesData";
 
 const LightConeModal = () => {
     const imgSource = useSelector((state) => state.imgSource.link);
     const rowID = useSelector((state) => state.modal.rowID);
-    const rowPath = useSelector((state) => state.rowsData[rowID].path);
-    const currentLightCone = useSelector((state) => state.rowsData[rowID].lightConeID);
+    const characterData = useSelector((state) => state.rowsData[rowID]);
     const [lightConesData, setLightConesData] = useState([]);
-    const [lightConesIcons, setLightConesIcons] = useState([]);
-    const [activeLightCone, setActiveLightCone] = useState({
-        ID: currentLightCone,
-        description: ""
-    });
-    const initialLightConeLvl = useSelector((state) => state.rowsData[rowID].lightConeLvl);
-    const [lvl, setLvl] = useState(initialLightConeLvl);
+    const [description, setDescription] = useState("");
+    const [lvl, setLvl] = useState(characterData.lightConeLvl);
     const dispatch = useDispatch();
 
     useEffect(() => {
-        const requestURLs = [
-            `${imgSource}/index_new/en/light_cone_ranks.json`,
-            `${imgSource}/index_new/en/light_cones.json`
-        ];
-        const requests = requestURLs.map(URL => fetch(URL));
-        Promise.all(requests)
-            .then(responses => {
-                return Promise.all(responses.map(resp => resp.json()));
-            })
-            .then(data => {
-                const IDs = Object.keys(data[0]);
-                const combinedData = IDs.map(ID => {
-                    const params = data[0][ID].params[0];
-
-                    let description = data[0][ID].desc;
-                    description = description
-                        .replace(/#\d\[(i|f\d)\]%/g, rep => `${Math.floor(params[rep[1] - 1] * 10000) / 100}%`)
-                        .replace(/#\d\[(i|f\d)\]/g, rep => params[rep[1] - 1]);
-
-                    const path = data[1][ID].path;
-                    return { ID, description, path };
-                }).reverse();
-                setLightConesData(combinedData);
-            });
+        getLightConesData(imgSource)
+            .then(data => setLightConesData(data))
+            .catch(error => console.log(error));
     }, []);
+
+    const icons = [...lightConesData]
+        .filter(el => el.path === characterData.path)
+        .map(el => {
+            return <img
+                key={el.ID}
+                id={el.ID}
+                src={el.icon}
+                className="square"
+                onClick={selectLightCone}
+            ></img>
+        });
 
     function selectLightCone(event) {
         dispatch(changeLightCone({
@@ -55,54 +41,36 @@ const LightConeModal = () => {
     }
 
     useEffect(() => {
-        setLightConesIcons([]);
-        [...lightConesData]
-            .filter(el => el.path === rowPath)
-            .forEach(el => {
-                const ID = el.ID;
-                const lightConeIcon = `${imgSource}/image/light_cone_preview/${ID}.png`;
-                if (lightConeIcon) {
-                    setLightConesIcons(prev => [
-                        ...prev,
-                        <img
-                            key={ID}
-                            id={ID}
-                            src={lightConeIcon}
-                            className="square"
-                            onClick={selectLightCone}
-                        ></img>
-                    ])
-                }
-            })
-    }, [lightConesData]);
-
-    useEffect(() => {
         if (lightConesData.length) {
-            setActiveLightCone({
-                ID: currentLightCone,
-                description: lightConesData.find(cone => cone.ID == currentLightCone).description
-            });
+            setDescription(lightConesData.find(cone => cone.ID == characterData.lightConeID).description);
         }
-    }, [lightConesData, currentLightCone]);
+    }, [lightConesData, characterData.lightConeID]);
 
     function handleLvlChange(event) {
         setLvl(event.target.value);
+        dispatch(changeLightConeLvl({ rowID, lvl }));
     }
 
+    const imgStyle = {
+        backgroundImage: `url("${imgSource}/image/light_cone_portrait/${characterData.lightConeID}.png")`
+    }
+
+    const [height, setHeight] = useState(0)
+    const ref = useRef(null)
     useEffect(() => {
-        dispatch(changeLightConeLvl({rowID, lvl}));
-    }, [lvl])
+        setHeight(ref.current.clientHeight)
+    })
 
     return (
         <div className="modal-window lightcone-modal">
             <h2 className="lightcone-modal__title">Choose a Light Cone and set it`s lvl</h2>
             <div className="lightcone-modal__lightcones">
-                {lightConesIcons}
+                {icons}
             </div>
-            <img className="lightcone-modal__selected-lightcone" src={`${imgSource}/image/light_cone_portrait/${activeLightCone.ID}.png`}></img>
+            <div className="lightcone-modal__selected-lightcone" ref={ref} style={imgStyle}></div>
             <div className="lightcone-modal__lvl square square__lvl">{lvl}</div>
-            <input className="lightcone-modal__range" type="range" min="0" max="80" step="1" value={lvl} onChange={handleLvlChange} />
-            <p className="lightcone-modal__description">{activeLightCone.description}</p>
+            <input className="lightcone-modal__range" type="range" min="0" max="80" step="1" value={lvl} onChange={handleLvlChange} style={{ width: height }} />
+            <p className="lightcone-modal__description">{description}</p>
             <CloseButton />
         </div>
     )

@@ -9,4 +9,4 @@ export const store = configureStore({
         imgSource: imgSourceReducer,
         modal: modalSliceReducer
     }
-})
+});

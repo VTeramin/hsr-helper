@@ -11,7 +11,7 @@ const Skills = ({ rowID }) => {
         "_technique",
         "_ultimate"
     ];
-    const skillsIconsArray = skillsArray.map(skillName => `${imgSource}/icon/skill/${characterData.characterID + skillName}.png`)
+    const skillsIconsArray = skillsArray.map(skillName => `${imgSource}/icon/skill/${characterData.characterID + skillName}.png`);
 
     return (
         <div className="square skills">

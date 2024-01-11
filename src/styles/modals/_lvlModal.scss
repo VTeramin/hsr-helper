@@ -1,0 +1,28 @@
+.lvl-modal {
+    width: max-content;
+    height: max-content;
+
+    display: grid;
+    grid-template-areas:
+        "title lvl close"
+        "range lvl close";
+    gap: 10px;
+
+    &__title {
+        @extend %font-settings;
+        grid-area: title;
+    }
+
+    &__range {
+        grid-area: range;
+    }
+
+    &__lvl {
+        cursor: auto;
+        grid-area: lvl;
+    }
+
+    &>.close-button {
+        grid-area: close;
+    }
+}

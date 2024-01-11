@@ -7,9 +7,7 @@ const initialState = {
 export const imgSourceSlice = createSlice({
     name: 'imgSource',
     initialState,
-    reducers: {
-
-    }
+    reducers: {}
 });
 
 export default imgSourceSlice.reducer;

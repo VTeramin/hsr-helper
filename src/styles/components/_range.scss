@@ -1,12 +1,14 @@
 input[type="range"] {
+  appearance: none;
   -webkit-appearance: none;
   width: 300px;
   height: 7px;
-  margin: auto 0px;
+  margin: auto;
   background: $dark-grey;
   border-radius: 5px;
 
   &::-webkit-slider-thumb {
+    appearance: none;
     -webkit-appearance: none;
     height: 7px;
     width: 30px;
@@ -17,6 +19,7 @@ input[type="range"] {
   }
 
   &::-webkit-slider-runnable-track {
+    appearance: none;
     -webkit-appearance: none;
     box-shadow: none;
     border: none;

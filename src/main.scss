@@ -1,6 +1,11 @@
 @import "./styles/variables";
 @import "./styles/body";
-@import "./styles/characterRow";
-@import "./styles/modal";
-@import "./styles/scrollbar";
-@import "./styles/range";
+
+@import "./styles/components/scrollbar";
+@import "./styles/components/range";
+@import "./styles/components/characterRow";
+@import "./styles/components/modal";
+
+@import "./styles/modals/charcaterModal";
+@import "./styles/modals/lightConeModal";
+@import "./styles/modals/lvlModal";

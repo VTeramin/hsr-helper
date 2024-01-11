@@ -7,8 +7,6 @@ const LightCone = ({ rowID }) => {
   const characterData = useSelector((state) => state.rowsData[rowID]);
   const imgSource = useSelector((state) => state.imgSource.link);
   const lightConeIcon = `${imgSource}/image/light_cone_preview/${characterData.lightConeID}.png`;
-  const lightConeLvl = useSelector((state) => state.rowsData[rowID].lightConeLvl);
-
   const dispatch = useDispatch();
 
   function showModal() {
@@ -16,13 +14,13 @@ const LightCone = ({ rowID }) => {
     dispatch(changeModal({ rowID, type: "LightCone" }));
   }
 
-  const styles = {
-    height: `${70 - lightConeLvl / 80 * 70}px`
+  const style = {
+    height: `${70 - characterData.lightConeLvl / 80 * 70}px`
   };
 
   return (
     <div>
-      <div className="square square-shadow" style={styles} onClick={showModal}></div>
+      <div className="square square-shadow" style={style} onClick={showModal}></div>
       <img src={lightConeIcon} className="square" onClick={showModal}></img>
     </div>
   )

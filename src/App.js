@@ -1,25 +1,24 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { switchModalState } from "./features/modalSlice";
 import CharacterRow from "./components/CharacterRow";
 import CharacterModal from "./components/modals/CharacterModal";
 import LvlModal from "./components/modals/LvlModal";
 import LightConeModal from "./components/modals/LightConeModal";
-import { switchModalState } from "./features/modalSlice";
 
 const App = () => {
     const characterData = useSelector((state) => state.rowsData);
+    const { stateIsOn: modalIsOn, type: modalType } = useSelector((state) => state.modal);
+    const dispatch = useDispatch();
+
     const rows = characterData.map((rowData, ind) => {
         return <CharacterRow key={ind} rowID={ind} />
-    })
+    });
     const modals = {
         Character: <CharacterModal />,
         Lvl: <LvlModal />,
         LightCone: <LightConeModal />
     };
-
-    const { stateIsOn: modalIsOn, type: modalType} = useSelector((state) => state.modal);
-
-    const dispatch = useDispatch();
 
     function closeModal(event) {
         if (event.target.classList.contains("shadow")) {
@@ -38,6 +37,6 @@ const App = () => {
             {modalIsOn && modals[modalType]}
         </>
     )
-}
+};
 
 export default App;
