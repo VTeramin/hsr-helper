@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import CloseButton from "../buttons/CloseButton";
 import { useSelector, useDispatch } from "react-redux";
@@ -12,8 +12,11 @@ const LvlModal = () => {
 
     function handleLvlChange(event) {
         setLvl(event.target.value);
-        dispatch(changeLvl({rowID, lvl}));
     }
+
+    useEffect(() => {
+        dispatch(changeLvl({rowID, lvl}));
+    }, [lvl])
 
     return (
         <div className="modal-window lvl-modal">

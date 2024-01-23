@@ -5,6 +5,7 @@ import CharacterRow from "./components/CharacterRow";
 import CharacterModal from "./components/modals/CharacterModal";
 import LvlModal from "./components/modals/LvlModal";
 import LightConeModal from "./components/modals/LightConeModal";
+import SkillsModal from "./components/modals/SkillsModal";
 
 const App = () => {
     const characterData = useSelector((state) => state.rowsData);
@@ -17,7 +18,8 @@ const App = () => {
     const modals = {
         Character: <CharacterModal />,
         Lvl: <LvlModal />,
-        LightCone: <LightConeModal />
+        LightCone: <LightConeModal />,
+        Skills: <SkillsModal />
     };
 
     function closeModal(event) {

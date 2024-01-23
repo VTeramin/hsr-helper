@@ -24,13 +24,15 @@ const LightConeModal = () => {
     const icons = [...lightConesData]
         .filter(el => el.path === characterData.path)
         .map(el => {
-            return <img
-                key={el.ID}
-                id={el.ID}
-                src={el.icon}
-                className="square"
-                onClick={selectLightCone}
-            ></img>
+            return (
+                <img
+                    key={el.ID}
+                    id={el.ID}
+                    src={el.icon}
+                    className="square"
+                    onClick={selectLightCone}
+                ></img>
+            )
         });
 
     function selectLightCone(event) {
@@ -48,18 +50,20 @@ const LightConeModal = () => {
 
     function handleLvlChange(event) {
         setLvl(event.target.value);
-        dispatch(changeLightConeLvl({ rowID, lvl }));
     }
+    useEffect(() => {
+        dispatch(changeLightConeLvl({ rowID, lvl }));
+    }, [lvl]);
 
     const imgStyle = {
         backgroundImage: `url("${imgSource}/image/light_cone_portrait/${characterData.lightConeID}.png")`
-    }
+    };
 
-    const [height, setHeight] = useState(0)
+    const [height, setHeight] = useState(0);
     const ref = useRef(null)
     useEffect(() => {
         setHeight(ref.current.clientHeight)
-    })
+    });
 
     return (
         <div className="modal-window lightcone-modal">
@@ -69,7 +73,16 @@ const LightConeModal = () => {
             </div>
             <div className="lightcone-modal__selected-lightcone" ref={ref} style={imgStyle}></div>
             <div className="lightcone-modal__lvl square square__lvl">{lvl}</div>
-            <input className="lightcone-modal__range" type="range" min="0" max="80" step="1" value={lvl} onChange={handleLvlChange} style={{ width: height }} />
+            <input
+                className="lightcone-modal__range"
+                type="range"
+                min="0"
+                max="80"
+                step="1"
+                value={lvl}
+                onChange={handleLvlChange}
+                style={{ width: height }}
+            />
             <p className="lightcone-modal__description">{description}</p>
             <CloseButton />
         </div>

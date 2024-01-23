@@ -7,6 +7,13 @@ const initialState = [
         lvl: 80,
         lightConeID: 20002,
         lightConeLvl: 60,
+        skillsLvl: {
+            _basic_atk: 6,
+            _skill: 10,
+            _ultimate: 10,
+            _talent: 10,
+            _technique: 10
+        },
         relicsID: [113, 113, 113, 113],
         ornamentsID: [306, 306],
         characterProgress: 30
@@ -17,6 +24,13 @@ const initialState = [
         lvl: 80,
         lightConeID: 20004,
         lightConeLvl: 80,
+        skillsLvl: {
+            _basic_atk: 0,
+            _skill: 0,
+            _ultimate: 0,
+            _talent: 0,
+            _technique: 0
+        },
         relicsID: [114, 114, 114, 114],
         ornamentsID: [307, 307],
         characterProgress: 38
@@ -46,6 +60,10 @@ export const rowsDataSlice = createSlice({
         changeLightConeLvl: (state, action) => {
             const rowID = action.payload.rowID;
             state[rowID].lightConeLvl = action.payload.lvl;
+        },
+        changeSkillsLvl: (state, action) => {
+            const rowID = action.payload.rowID;
+            state[rowID].skillsLvl = action.payload.lvl;
         }
     }
 });
@@ -54,6 +72,7 @@ export const {
     changeCharacter, 
     changeLvl, 
     changeLightCone, 
-    changeLightConeLvl 
+    changeLightConeLvl,
+    changeSkillsLvl
 } = rowsDataSlice.actions;
 export default rowsDataSlice.reducer;

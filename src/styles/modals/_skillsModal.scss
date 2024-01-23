@@ -1,0 +1,55 @@
+.skills-modal {
+    width: max-content;
+    height: max-content;
+
+    display: grid;
+    grid-template-areas:
+        "title close"
+        "skills skills";
+    grid-template-columns: 1fr max-content;
+    gap: 15px;
+
+    &__title {
+        @extend %font-settings;
+        grid-area: title;
+    }
+
+    &>.close-button {
+        grid-area: close;
+        margin-left: auto;
+    }
+
+    &__skills {
+        grid-area: skills;
+        display: flex;
+        flex-direction: column;
+        row-gap: 15px;
+    }
+}
+
+.skills-row {
+    display: grid;
+    grid-template-areas:
+        "icon title lvl"
+        "icon range lvl";
+    
+    gap: 15px;
+
+    &__icon {
+        grid-area: icon;
+    }
+
+    &__title {
+        @extend %font-settings;
+        font-size: 20px;
+        grid-area: title;
+    }
+
+    &__range {
+        grid-area: range;
+    }
+
+    &__lvl {
+        grid-area: lvl;
+    }
+}
