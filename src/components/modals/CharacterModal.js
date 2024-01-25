@@ -19,15 +19,13 @@ const CharacterModal = () => {
     }, []);
 
     const icons = [...charactersData].map(el => {
-        return (
-            <img
-                key={el.ID}
-                id={el.ID}
-                src={`${imgSource}/icon/character/${el.ID}.png`}
-                className="square"
-                onClick={selectCharacter}
-            ></img>
-        )
+        return <img
+            key={el.ID}
+            id={el.ID}
+            src={`${imgSource}/icon/character/${el.ID}.png`}
+            className="square"
+            onClick={selectCharacter}
+        ></img>
     });
 
     function selectCharacter(event) {
@@ -43,7 +41,7 @@ const CharacterModal = () => {
 
     return (
         <div className="modal-window character-modal">
-            <h2 className="character-modal__title">Choose a character</h2>
+            <h2 className="character-modal__title title">Choose a character</h2>
             <CloseButton />
             <div className="character-modal__icons">
                 {icons}

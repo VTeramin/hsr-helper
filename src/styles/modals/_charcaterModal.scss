@@ -8,7 +8,6 @@
 
     &__title {
         grid-area: title;
-        @extend %font-settings;
     }
 
     &__icons {
@@ -16,11 +15,13 @@
 
         width: 100%;
         height: 100%;
-        display: flex;
-        flex-direction: row;
-        flex-wrap: wrap;
-        align-content: flex-start;
-        gap: 17px;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, 65px);
+        grid-template-rows: repeat(auto-fit, 65px);
+        justify-content: space-between;
+        gap: 20px;
+
+        padding-right: 15px;
 
         overflow-y: auto;
         scroll-behavior: smooth;

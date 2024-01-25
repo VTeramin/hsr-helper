@@ -16,11 +16,11 @@ const LvlModal = () => {
 
     useEffect(() => {
         dispatch(changeLvl({rowID, lvl}));
-    }, [lvl])
+    }, [lvl]);
 
     return (
         <div className="modal-window lvl-modal">
-            <div className="lvl-modal__title">Set character level</div>
+            <div className="lvl-modal__title title">Set character level</div>
             <input className="lvl-modal__range" type="range" min="0" max="80" step="1" value={lvl} onChange={handleLvlChange} />
             <div className="lvl-modal__lvl square square__lvl">{lvl}</div>
             <CloseButton />

@@ -14,8 +14,8 @@ const initialState = [
             _talent: 10,
             _technique: 10
         },
-        relicsID: [113, 113, 113, 113],
-        ornamentsID: [306, 306],
+        relicsID: [113, 113, 113, 113, 306, 306],
+        relicsLvl: [20, 20, 20, 20, 20, 20],
         characterProgress: 30
     },
     {
@@ -31,8 +31,8 @@ const initialState = [
             _talent: 0,
             _technique: 0
         },
-        relicsID: [114, 114, 114, 114],
-        ornamentsID: [307, 307],
+        relicsID: [114, 114, 114, 114, 307, 307],
+        relicsLvl: [20, 20, 20, 20, 20, 20],
         characterProgress: 38
     }
 ];
@@ -64,6 +64,20 @@ export const rowsDataSlice = createSlice({
         changeSkillsLvl: (state, action) => {
             const rowID = action.payload.rowID;
             state[rowID].skillsLvl = action.payload.lvl;
+        },
+        changeRelic: (state, action) => {
+            const rowID = action.payload.rowID;
+            state[rowID].relicsID[action.payload.relicInd] = action.payload.relicID;
+        },
+        changeFullRelicSet: (state, action) => {
+            const rowID = action.payload.rowID;
+            action.payload.relicInd < 4 ?
+            [0, 1, 2, 3].forEach(ind => state[rowID].relicsID[ind] = action.payload.relicID) :
+            [4, 5].forEach(ind => state[rowID].relicsID[ind] = action.payload.relicID);
+        },
+        changeRelicLvl: (state, action) => {
+            const rowID = action.payload.rowID;
+            state[rowID].relicsLvl[action.payload.relicInd] = action.payload.lvl;
         }
     }
 });
@@ -73,6 +87,9 @@ export const {
     changeLvl, 
     changeLightCone, 
     changeLightConeLvl,
-    changeSkillsLvl
+    changeSkillsLvl,
+    changeRelic,
+    changeFullRelicSet,
+    changeRelicLvl
 } = rowsDataSlice.actions;
 export default rowsDataSlice.reducer;

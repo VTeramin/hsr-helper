@@ -9,7 +9,6 @@
     gap: 10px;
 
     &__title {
-        @extend %font-settings;
         grid-area: title;
     }
 

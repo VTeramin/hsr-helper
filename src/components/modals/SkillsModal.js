@@ -30,7 +30,7 @@ const SkillsModal = () => {
         return (
             <div className="skills-row" key={ind}>
                 <img className="skills-row__icon square" src={`${imgSource}/icon/skill/${characterData.characterID + skillName}.png`}></img>
-                <h3 className="skills-row__title">{skillsTitles[ind]}</h3>
+                <h3 className="skills-row__title title">{skillsTitles[ind]}</h3>
                 <input
                     className="skills-row__range"
                     type="range"
@@ -51,7 +51,7 @@ const SkillsModal = () => {
 
     return (
         <div className="modal-window skills-modal">
-            <h2 className="skills-modal__title">Set skills level</h2>
+            <h2 className="skills-modal__title title">Set skills level</h2>
             <CloseButton />
             <div className="skills-modal__skills">
                 {rows}

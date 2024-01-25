@@ -40,3 +40,7 @@
 
     margin: 0px 10px;
 }
+
+.title {
+    @extend %font-settings;
+}

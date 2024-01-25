@@ -3,7 +3,8 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
     stateIsOn: false,
     type: "",
-    rowID: 0
+    rowID: 0,
+    ind: 0
 };
 
 export const modalSlice = createSlice({
@@ -14,8 +15,9 @@ export const modalSlice = createSlice({
             state.stateIsOn = !state.stateIsOn;
         },
         changeModal: (state, action) => {
-            state.type = action.payload.type,
-            state.rowID = action.payload.rowID
+            state.type = action.payload.type;
+            state.rowID = action.payload.rowID;
+            state.ind = action.payload.ind;
         }
     }
 });

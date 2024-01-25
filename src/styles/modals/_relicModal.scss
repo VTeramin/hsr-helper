@@ -1,0 +1,84 @@
+.relic-modal {
+    display: grid;
+    grid-template-areas:
+        "title title close"
+        "selectedRelic description description"
+        "checkbox range lvl"
+        "relics relics relics";
+    grid-template-columns: min-content 1fr min-content;
+    grid-template-rows: min-content 1fr min-content 2fr;
+    column-gap: 30px;
+    row-gap: 15px;
+
+    &__title {
+        grid-area: title;
+    }
+
+    &__selected-relic {
+        grid-area: selectedRelic;
+        width: 150px;
+        height: 150px;
+        margin: auto 0px;
+        background-color: transparent;
+    }
+
+    &__description {
+        grid-area: description;
+
+        @extend %font-settings;
+        font-size: 1rem;
+
+        width: 100%;
+        height: 100%;
+        display: block;
+        text-wrap: wrap;
+
+        overflow-y: auto;
+        scroll-behavior: smooth;
+    }
+
+    &__checkbox-label {
+        grid-area: checkbox;
+
+        @extend %font-settings;
+        font-size: 1rem;
+
+        display: flex;
+        flex-direction: row;
+        margin: auto 0px;
+    }
+
+    &__checkbox {
+        grid-area: checkbox;
+    }
+
+    &__range {
+        grid-area: range;
+    }
+
+    &__lvl {
+        grid-area: lvl;
+    }
+
+    &__relics {
+        grid-area: relics;
+
+        display: grid;
+        grid-template-columns: repeat(auto-fit, 70px);
+        grid-template-rows: repeat(auto-fit, 70px);
+        justify-content: space-between;
+        gap: 15px;
+
+        overflow-y: auto;
+        scroll-behavior: smooth;
+    }
+
+    &__relics:last-child {
+        margin-right: auto;
+    }
+
+    &>.close-button {
+        grid-area: close;
+        margin-left: auto;
+    }
+}

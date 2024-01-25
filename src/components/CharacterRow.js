@@ -11,16 +11,10 @@ const CharacterRow = ({ rowID }) => {
     const characterData = useSelector((state) => state.rowsData[rowID]);
     const relics = characterData.relicsID.map((relicID, ind) => {
         return <Relic
-            key={"relic:" + ind}
+            key={ind}
             relicID={relicID}
             ind={ind}
-        />;
-    });
-    const ornaments = characterData.ornamentsID.map((relicID, ind) => {
-        return <Relic
-            key={"ornament:" + ind}
-            relicID={relicID}
-            ind={ind}
+            rowID={rowID}
         />;
     });
 
@@ -32,7 +26,6 @@ const CharacterRow = ({ rowID }) => {
                 <LightCone rowID={rowID} />
                 <Skills rowID={rowID} />
                 {relics}
-                {ornaments}
             </div>
             <ProgressBar rowID={rowID} />
         </div>

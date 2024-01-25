@@ -21,18 +21,16 @@ const LightConeModal = () => {
             .catch(error => console.log(error));
     }, []);
 
-    const icons = [...lightConesData]
+    const lightCones = [...lightConesData]
         .filter(el => el.path === characterData.path)
         .map(el => {
-            return (
-                <img
-                    key={el.ID}
-                    id={el.ID}
-                    src={el.icon}
-                    className="square"
-                    onClick={selectLightCone}
-                ></img>
-            )
+            return <img
+                key={el.ID}
+                id={el.ID}
+                src={el.icon}
+                className="square"
+                onClick={selectLightCone}
+            ></img>
         });
 
     function selectLightCone(event) {
@@ -67,9 +65,9 @@ const LightConeModal = () => {
 
     return (
         <div className="modal-window lightcone-modal">
-            <h2 className="lightcone-modal__title">Choose a Light Cone and set it`s lvl</h2>
+            <h2 className="lightcone-modal__title title">Choose a Light Cone and set it`s lvl</h2>
             <div className="lightcone-modal__lightcones">
-                {icons}
+                {lightCones}
             </div>
             <div className="lightcone-modal__selected-lightcone" ref={ref} style={imgStyle}></div>
             <div className="lightcone-modal__lvl square square__lvl">{lvl}</div>
