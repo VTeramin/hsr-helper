@@ -16,7 +16,7 @@ const initialState = [
         },
         relicsID: [113, 113, 113, 113, 306, 306],
         relicsLvl: [20, 20, 20, 20, 20, 20],
-        characterProgress: 30
+        characterProgress: 80
     },
     {
         characterID: 1004,
@@ -37,6 +37,14 @@ const initialState = [
     }
 ];
 
+function getProgress(characterData) {
+    const charProgress = characterData.lvl / 80 * 25;
+    const coneProgress = characterData.lightConeLvl / 80 * 25;
+    const skillsProgress = Object.values(characterData.skillsLvl).reduce((acc, it) => acc + it, 0) / 49 * 25;
+    const relicsProgress = characterData.relicsLvl.reduce((acc, it) => acc + it, 0) / 120 * 25;
+    return charProgress + coneProgress + skillsProgress + relicsProgress;
+}
+
 export const rowsDataSlice = createSlice({
     name: 'rowsData',
     initialState,
@@ -52,6 +60,7 @@ export const rowsDataSlice = createSlice({
             const rowID = action.payload.rowID;
             const lvl = action.payload.lvl;
             state[rowID].lvl = lvl;
+            state[rowID].characterProgress = getProgress(state[rowID]);
         },
         changeLightCone: (state, action) => {
             const rowID = action.payload.rowID;
@@ -60,10 +69,12 @@ export const rowsDataSlice = createSlice({
         changeLightConeLvl: (state, action) => {
             const rowID = action.payload.rowID;
             state[rowID].lightConeLvl = action.payload.lvl;
+            state[rowID].characterProgress = getProgress(state[rowID]);
         },
         changeSkillsLvl: (state, action) => {
             const rowID = action.payload.rowID;
             state[rowID].skillsLvl = action.payload.lvl;
+            state[rowID].characterProgress = getProgress(state[rowID]);
         },
         changeRelic: (state, action) => {
             const rowID = action.payload.rowID;
@@ -78,6 +89,7 @@ export const rowsDataSlice = createSlice({
         changeRelicLvl: (state, action) => {
             const rowID = action.payload.rowID;
             state[rowID].relicsLvl[action.payload.relicInd] = action.payload.lvl;
+            state[rowID].characterProgress = getProgress(state[rowID]);
         }
     }
 });

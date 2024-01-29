@@ -22,7 +22,7 @@ const SkillsModal = () => {
         function handleLvlChange(event) {
             setLvl(prev => ({
                 ...prev,
-                [skillName]: event.target.value
+                [skillName]: +event.target.value
             }));
         }
         const skillsTitles = ["Basic attack", "Skill", "Ultimate", "Talent", "Bonus stats and abilities"];

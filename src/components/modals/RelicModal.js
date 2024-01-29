@@ -46,7 +46,7 @@ const RelicModal = () => {
     }
 
     function handleLvlChange(event) {
-        setLvl(event.target.value);
+        setLvl(+event.target.value);
     }
     useEffect(() => {
         dispatch(changeRelicLvl({ rowID, lvl, relicInd }));
