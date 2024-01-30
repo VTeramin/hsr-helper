@@ -5,10 +5,6 @@ module.exports = {
     module: {
         rules: [
             {
-                test: /\.css$/,
-                use: ["style-loader", "css-loader"]
-            },
-            {
                 test: /\.html$/,
                 use: ["html-loader"]
             },
@@ -19,6 +15,10 @@ module.exports = {
                 options: {
                   presets: ["@babel/preset-env", "@babel/preset-react"]
                 }
+            },
+            {
+                test: /\.css$/,
+                use: ["style-loader", "css-loader"]
             },
             {
                 test: /\.(svg|png|jpe?g|gif)$/,
