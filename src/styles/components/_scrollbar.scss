@@ -2,18 +2,18 @@
     width: 10px;
     position: absolute;
     left: 10px;
-}
 
-::-webkit-scrollbar-track {
-    background: $dark-grey;
-    border-radius: 3px;
-}
-
-::-webkit-scrollbar-thumb {
-    background: $light-grey;
-    border-radius: 3px;
+    &-track {
+        background: $dark-grey;
+        border-radius: 3px;
+    }
     
-    &:hover {
-        cursor: pointer;
+    &-thumb {
+        background: $light-grey;
+        border-radius: 3px;
+        
+        &:hover {
+            cursor: pointer;
+        }
     }
 }

@@ -1,1 +1,1 @@
-https://vteramin.github.io/hsr-helper/src/
+https://vteramin.github.io/hsr-helper/
